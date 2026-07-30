@@ -1,0 +1,61 @@
+/* 浅色模式（默认） */
+:root {
+  --primary: #ee5050;
+  --secondary: #ff7070;
+  --bg-primary: #ffffffcc;
+  --bg-homepage-box: #ffffff99;
+  --bg-card: #ffffff;
+  --text-primary: #ee5050;
+  --text-secondary: #ff7070;
+  --border-color: #eeeeee;
+  --bg-navbar: FFFFFFCC;
+  --bg-navbar-scrolled: #ffffff;
+}
+
+/* 暗黑模式（html 标签加上 .dark 类时生效） */
+html.dark {
+  --primary: #ff9393;
+  --secondary: #ff7070;
+  --bg-primary: #141414cc;
+  --bg-homepage-box: #333333cc;
+  --bg-card: #16213e;
+  --text-primary: #ff9393;
+  --text-secondary: #ff7070;
+  --border-color: #2a2a4a;
+  --bg-navbar: 262626CC;
+  --bg-navbar-scrolled: #262626;
+}
+
+/* 全局重置：清除所有边距 */
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* 关键：只在 html 上隐藏水平滚动条，避免影响 body 的滚动容器属性 */
+html {
+  overflow-x: hidden;
+}
+
+/* 组件中引用这些变量，切换主题无需修改任何组件代码 */
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'BlogFont', sans-serif;
+}
+
+@font-face {
+  font-family: 'BlogFont';
+  src: url('@/assets/fonts/blog.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap; /* 优化加载体验 */
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
