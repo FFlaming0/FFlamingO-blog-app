@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@views/app/home/HomeView.vue'
+import HomeView from '@/views/app/home/HomeView.vue'
 
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -15,9 +15,9 @@ const routes: RouteRecordRaw[] = [
     // 动态路由：:id 是占位符，匹配任意值
     // /post/1、/post/2、/post/hello 都会匹配到这条
     path: '/article/:id',
-    name: 'article',
+    name: 'post',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
-    component: () => import('@views/PostView.vue'),
+    component: () => import('@/views/PostView.vue'),
     meta: {layout: 'DefaultLayout'}
   },
 ]

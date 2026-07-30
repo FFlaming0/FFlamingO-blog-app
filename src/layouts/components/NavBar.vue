@@ -5,7 +5,7 @@ import DrawerMenu from './DrawerMenu.vue'
 import RoundAvatar from '@/components/avatar/RoundAvatar.vue'
 import { ref, computed } from 'vue'
 import { useSearchStore } from '@/stores/search'
-import { useDarkMode } from '@/composables/useDarkMode'
+import { useDarkMode } from '@/composables/layouts/useDarkMode.ts'
 import { useWindowScroll } from '@vueuse/core'
 
 import type { DrawerItem, DrawerItemList } from '@/types/layouts/drawerItem.ts'

@@ -2,13 +2,6 @@
 import type { PropType } from 'vue'
 import type { Article } from '@/types/article'
 
-// 声明该组件接收的 props
-// const props = defineProps({
-//   article: {
-//     type: Object as PropType<Article>,
-//     required: true,
-//   },
-// })
 const props = defineProps<{
   article: Article
 }>()

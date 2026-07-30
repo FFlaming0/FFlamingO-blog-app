@@ -57,6 +57,7 @@ export function usePosts() {
       }
       const data = await response.json()
       articles.value = data
+      console.log(data)
     } catch (err: any) {
       error.value = err.message
       console.error('文章数据加载失败：', err)
