@@ -1,3 +1,5 @@
+import type { NavItemList, DrawerItemList  } from '@/types/layouts/menuItem.ts'
+
 export default [
   {
     url: '/api/navigation',

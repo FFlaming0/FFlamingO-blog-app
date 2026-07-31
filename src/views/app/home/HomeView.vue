@@ -8,8 +8,7 @@ import HomePage from './components/HomePage.vue'
 
 import type { Article } from '@/types/article'
 
-const { activeCategory, categories, filteredArticles } =
-  usePosts()
+const { activeCategory, categories, filteredArticles } = usePosts()
 
 // 处理子组件发来的分类切换事件
 function handleCategoryChange(cat: string) {

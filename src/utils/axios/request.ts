@@ -1,37 +1,37 @@
-import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios';
+import axios, { type AxiosInstance, type InternalAxiosRequestConfig } from 'axios'
 
 // 1. 创建 axios 实例
 const commonConfig = {
   timeout: 3000,
   headers: { 'Content-Type': 'application/json' },
-};
+}
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || '';
+const baseURL = import.meta.env.VITE_API_BASE_URL || ''
 
 // 创建前台（App）实例：基础路径为 /api
 const appRequest: AxiosInstance = axios.create({
   baseURL: `${baseURL}/api`,
   ...commonConfig,
-});
+})
 
 // 创建后台（Admin）实例：基础路径为 /api/admin
 const adminRequest: AxiosInstance = axios.create({
   baseURL: `${baseURL}/api/admin`,
   ...commonConfig,
-});
+})
 
 function setupInterceptors(instance: AxiosInstance) {
   // 请求拦截器
   instance.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token')
       if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${token}`
       }
-      return config;
+      return config
     },
-    (error) => Promise.reject(error)
-  );
+    (error) => Promise.reject(error),
+  )
 
   // 响应拦截器
   instance.interceptors.response.use(
@@ -39,25 +39,22 @@ function setupInterceptors(instance: AxiosInstance) {
     (error) => {
       // 统一处理 401
       if (error.response?.status === 401) {
-        localStorage.removeItem('token');
+        localStorage.removeItem('token')
         // 跳转登录页（需引入 router）
         // router.push('/login');
       }
       // 提取错误信息
       const message =
-        error.response?.data?.message ||
-        error.response?.data?.msg ||
-        error.message ||
-        '请求失败';
-      return Promise.reject({ status: error.response?.status, message });
-    }
-  );
+        error.response?.data?.message || error.response?.data?.msg || error.message || '请求失败'
+      return Promise.reject({ status: error.response?.status, message })
+    },
+  )
 }
 
-setupInterceptors(appRequest);
-setupInterceptors(adminRequest);
+setupInterceptors(appRequest)
+setupInterceptors(adminRequest)
 
-export { appRequest, adminRequest };
+export { appRequest, adminRequest }
 
 // // 2. 请求拦截器
 // service.interceptors.request.use(

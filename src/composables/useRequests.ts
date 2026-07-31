@@ -1,5 +1,5 @@
 import { ref, type Ref } from 'vue'
-import { appRequest, adminRequest }  from '@/utils/axios/request.ts' // 导入封装的 axios 实例
+import { appRequest, adminRequest } from '@/utils/axios/request.ts' // 导入封装的 axios 实例
 import type { RequestOptions, RequestReturn } from '@/types/composables/request.ts'
 
 /**
@@ -12,7 +12,7 @@ export function useRequest<T, Args extends any[] = any[]>(
   apiMethod: (...args: Args) => Promise<T>,
   options: RequestOptions<Args> = {},
 ): RequestReturn<T, Args> {
-  const { immediate = true, defaultParams, onError } = options;
+  const { immediate = true, defaultParams, onError } = options
   const data = ref<T | null>(null) as Ref<T | null>
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -28,15 +28,15 @@ export function useRequest<T, Args extends any[] = any[]>(
     } catch (err) {
       // 错误统一处理：调用传入的 onError 或全局错误处理函数
       if (onError) {
-        onError(err);
+        onError(err)
       } else {
         // 假设 showError 会弹出错误提示
         // showError(err instanceof Error ? err.message : '请求失败');
         const message = err instanceof Error ? err.message : String(err)
-      error.value = message || '请求失败'
-      console.error('API Error:', err)
+        error.value = message || '请求失败'
+        console.error('API Error:', err)
       }
-      return undefined;
+      return undefined
     } finally {
       loading.value = false
     }

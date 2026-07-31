@@ -10,12 +10,12 @@ import { useWindowScroll } from '@vueuse/core'
 
 import type { DrawerItemList, NavItemList } from '@/types/layouts/menuItem.ts'
 import { getNavigation } from '@/api/app/navigation/getMenuItem'
-import { useRequest } from '@/composables/useRequests.ts';
+import { useRequest } from '@/composables/useRequests.ts'
 
 const { toggleDark } = useDarkMode()
 const search = useSearchStore()
 
-const { data: navItems, loading: navLoading } = useRequest(getNavigation, { immediate: true });
+const { data: navItems, loading: navLoading } = useRequest(getNavigation, { immediate: true })
 
 // 获取滚动 Y 轴偏移
 const { y } = useWindowScroll()
