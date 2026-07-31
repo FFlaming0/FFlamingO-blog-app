@@ -1,0 +1,9 @@
+# <type>(<scope>): <subject>
+# <空行>
+# <body>
+# <空行>
+# <footer>
+#
+# type 可选值: feat, fix, docs, style, refactor, perf, test, 
+#           chore, revert, build, ci, merge, release, other
+# body: 每行不超过72个字符:
