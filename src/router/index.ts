@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
     path: '/', // URL 路径
     name: 'home', // 路由名称（可选，编程式导航时用）
     component: HomeView, // 对应的页面组件
-    meta: {layout: 'HomeLayout'}
+    meta: { layout: 'HomeLayout' },
   },
   {
     // 动态路由：:id 是占位符，匹配任意值
@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
     name: 'post',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
     component: () => import('@/views/PostView.vue'),
-    meta: {layout: 'DefaultLayout'}
+    meta: { layout: 'DefaultLayout' },
   },
 ]
 

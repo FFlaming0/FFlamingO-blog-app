@@ -8,25 +8,14 @@ import { useSearchStore } from '@/stores/search'
 import { useDarkMode } from '@/composables/layouts/useDarkMode.ts'
 import { useWindowScroll } from '@vueuse/core'
 
-import type { DrawerItem, DrawerItemList } from '@/types/layouts/drawerItem.ts'
+import type { DrawerItemList, NavItemList } from '@/types/layouts/menuItem.ts'
+import { getNavigation } from '@/api/app/navigation/getMenuItem'
+import { useRequest } from '@/composables/useRequests.ts';
 
-const { isDark, toggleDark } = useDarkMode()
+const { toggleDark } = useDarkMode()
 const search = useSearchStore()
 
-const wanxiang: DrawerItemList = [
-  { label: '硅基漫游', to: '/', icon: 'fa-solid fa-terminal' },
-  { label: '观灼留影', to: '/', icon: 'fa-solid fa-comment-dots' },
-  { label: '墨烬成珠', to: '/', icon: 'fa-solid fa-feather' },
-  { label: '幻暮绘梦', to: '/', icon: 'fa-solid fa-film' },
-  { label: '流音叙世', to: '/', icon: 'fa-solid fa-headphones' },
-  { label: '栖川拾芥', to: '/', icon: 'fa-solid fa-bed-pulse' },
-]
-const about: DrawerItemList = [
-  { label: '关于本站', to: '/', icon: 'fa-solid fa-circle-info' },
-  { label: '关于作者', to: '/', icon: 'fa-solid fa-user' },
-  { label: '友情链接', to: '/', icon: 'fa-solid fa-link' },
-  { label: 'Steam', to: '/', icon: 'fa-brands fa-steam' },
-]
+const { data: navItems, loading: navLoading } = useRequest(getNavigation, { immediate: true });
 
 // 获取滚动 Y 轴偏移
 const { y } = useWindowScroll()
@@ -38,21 +27,18 @@ const isScrolled = computed(() => y.value > 10)
   <header class="navbar" :class="{ scrolled: isScrolled }">
     <a href="/" class="logo">汀上焰影</a>
     <nav class="menu-item">
-      <a href="/" class="nav-link"><i class="fa-solid fa-house"></i>首页</a>
-      <a href="/" class="nav-link"><i class="fa-solid fa-box-archive"></i>你好，时光</a>
-      <!-- <a class="nav-link"><i class="fa-solid fa-ellipsis"></i>万象</a> -->
-      <DrawerMenu :items="wanxiang">
-        <template #down>
-          <a class="nav-link"><i class="fa-solid fa-ellipsis"></i>万象</a>
-        </template>
-      </DrawerMenu>
-      <a href="/" class="nav-link"><i class="fa-solid fa-table-columns"></i>专栏</a>
-      <!-- <a class="nav-link"><i class="fa-solid fa-address-card"></i>关于</a> -->
-      <DrawerMenu :items="about">
-        <template #down>
-          <a class="nav-link"><i class="fa-solid fa-address-card"></i>关于</a>
-        </template>
-      </DrawerMenu>
+      <template v-for="item in navItems" :key="item.label">
+        <!-- 有 children → 渲染下拉菜单 -->
+        <DrawerMenu v-if="item.secItem" :items="item.secItem">
+          <template #down>
+            <a class="nav-link"><i :class="item.icon"></i>{{ item.label }}</a>
+          </template>
+        </DrawerMenu>
+        <!-- 无 children → 普通链接 -->
+        <a v-else :href="item.to || '/'" class="nav-link">
+          <i :class="item.icon"></i>{{ item.label }}
+        </a>
+      </template>
     </nav>
     <div class="tool-box">
       <a><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -116,18 +102,6 @@ const isScrolled = computed(() => y.value > 10)
   display: flex;
   align-items: center;
   align-self: stretch; /* 覆盖父容器的 align-items: center，使自身高度填满父容器内容区 */
-}
-
-.menu-item a {
-  margin: 0 14px;
-  padding: 10px 0;
-  text-decoration: none;
-  color: var(--text-primary);
-  font-size: 18px;
-}
-
-.menu-item a:hover {
-  color: var(--primary);
 }
 
 /* 每个导航链接 */

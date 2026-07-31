@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DrawerItemList } from '@/types/layouts/drawerItem.ts'
+import type { DrawerItemList } from '@/types/layouts/menuItem'
 
 defineProps<{
   items: DrawerItemList
@@ -9,9 +9,7 @@ defineProps<{
 <template>
   <div class="dropdown-wrapper">
     <!-- 触发元素（支持自定义插槽） -->
-    <slot name="down">
-      <span class="dropdown-trigger">下拉菜单 ▼</span>
-    </slot>
+    <slot name="down"> </slot>
 
     <!-- 下拉菜单 -->
     <div class="dropdown-menu">
