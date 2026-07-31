@@ -1,8 +1,12 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const prop = defineProps<{
+  subTitle: string
+}>()
+</script>
 
 <template>
   <div class="title-box">
-    <p class="title-box-text">一羽流火，惊破千顷碧波；半声清唳，唤彻九霄晨曦。</p>
+    <p class="title-box-text">{{ prop.subTitle }}</p>
   </div>
 </template>
 

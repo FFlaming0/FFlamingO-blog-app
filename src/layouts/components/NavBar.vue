@@ -7,15 +7,11 @@ import { ref, computed } from 'vue'
 import { useSearchStore } from '@/stores/search'
 import { useDarkMode } from '@/composables/layouts/useDarkMode.ts'
 import { useWindowScroll } from '@vueuse/core'
-
-import type { DrawerItemList, NavItemList } from '@/types/layouts/menuItem.ts'
-import { getNavigation } from '@/api/app/navigation/getMenuItem'
-import { useRequest } from '@/composables/useRequests.ts'
+import { useFrontendConfigStore } from '@/stores/frontendConfig'
+const configStore = useFrontendConfigStore()
 
 const { toggleDark } = useDarkMode()
 const search = useSearchStore()
-
-const { data: navItems, loading: navLoading } = useRequest(getNavigation, { immediate: true })
 
 // 获取滚动 Y 轴偏移
 const { y } = useWindowScroll()
@@ -27,16 +23,16 @@ const isScrolled = computed(() => y.value > 10)
   <header class="navbar" :class="{ scrolled: isScrolled }">
     <a href="/" class="logo">汀上焰影</a>
     <nav class="menu-item">
-      <template v-for="item in navItems" :key="item.label">
-        <!-- 有 children → 渲染下拉菜单 -->
+      <template v-for="item in configStore.navItems" :key="item.name">
+        <!-- 有 secItem → 渲染下拉菜单 -->
         <DrawerMenu v-if="item.secItem" :items="item.secItem">
           <template #down>
-            <a class="nav-link"><i :class="item.icon"></i>{{ item.label }}</a>
+            <a class="nav-link"><i :class="item.icon"></i>{{ item.name }}</a>
           </template>
         </DrawerMenu>
         <!-- 无 children → 普通链接 -->
-        <a v-else :href="item.to || '/'" class="nav-link">
-          <i :class="item.icon"></i>{{ item.label }}
+        <a v-else :href="item.link || '/'" class="nav-link">
+          <i :class="item.icon"></i>{{ item.name }}
         </a>
       </template>
     </nav>

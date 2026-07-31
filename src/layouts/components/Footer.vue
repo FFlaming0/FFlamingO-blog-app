@@ -1,8 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useFrontendConfigStore } from '@/stores/frontendConfig'
+const configStore = useFrontendConfigStore()
+</script>
 
 <template>
   <footer class="footer">
-    <p>Copyright © by FFlamingO All Rights Reserved.</p>
+    <p>{{ configStore.footerInfo?.copyright }}</p>
   </footer>
 </template>
 

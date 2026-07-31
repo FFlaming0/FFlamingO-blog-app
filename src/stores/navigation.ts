@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { NavItemList } from '@/types/layouts/menuItem'
-import { getNavigation } from '@/api/app/navigation/getMenuItem'
+import { getNavigation } from '@/api/system/config/getMenuItem'
 
 export const useNavigationStore = defineStore('navigation', () => {
   const items = ref<NavItemList>([])

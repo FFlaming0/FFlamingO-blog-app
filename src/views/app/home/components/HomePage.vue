@@ -1,54 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 
 import Title from './Title.vue'
 import SubTitle from './SubTitle.vue'
 import LinkBox from './LinkBox.vue'
+import { useFrontendConfigStore } from '@/stores/frontendConfig'
 
 import type { LinkBoxList } from '@/types/app/home/link-box.ts'
+
+const config = useFrontendConfigStore()
+const { siteInfo, socialLinks } = storeToRefs(config)
 
 import bg from '/images/homepage/END8-1_7.png'
 
 const bgImageUrl = ref(new URL(bg, import.meta.url).href)
-
 const changeBackground = (newUrl: string) => {
   bgImageUrl.value = newUrl
 }
 
-const linkBoxes = ref<LinkBoxList>([
-  {
-    icon: 'ri-qq-line',
-    link: '',
-    picture: bg,
-  },
-  {
-    icon: 'ri-bilibili-line',
-    link: 'https://space.bilibili.com/283057416',
-    picture: '',
-  },
-  {
-    icon: 'ri-netease-cloud-music-line',
-  },
-  {
-    icon: 'ri-github-line',
-  },
-  {
-    icon: 'ri-steam-line',
-  },
-  {
-    icon: 'ri-twitter-line',
-  },
-  {
-    icon: 'ri-mail-line',
-  },
-])
+
 </script>
 
 <template>
   <div class="container" :style="{ backgroundImage: `url(${bgImageUrl})` }">
-    <Title />
-    <SubTitle />
-    <LinkBox :items="linkBoxes" />
+    <Title v-if="siteInfo" :title="siteInfo.mainTitle" />
+    <SubTitle v-if="siteInfo" :sub-title="siteInfo.subTitle" />
+    <LinkBox v-if="socialLinks" :items="socialLinks" />
   </div>
 </template>
 

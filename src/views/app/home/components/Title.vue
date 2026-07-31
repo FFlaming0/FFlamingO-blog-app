@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-const title = '朱羽凌霞，灼华沐川'
+const props = defineProps<{
+  title: string
+}>()
+
 const isJittering = ref(false)
 // 抖动偏移量
 const dx = ref(0)
@@ -49,7 +52,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="title-wrapper" @mouseenter="startJitter" @mouseleave="stopJitter">
     <!-- 主标题 -->
-    <h1 class="title main" role="heading" tabindex="0">{{ title }}</h1>
+    <h1 class="title main" role="heading" tabindex="0">{{ props.title }}</h1>
     <!-- 抖动层 -->
     <h1
       class="title jitter"
@@ -57,7 +60,7 @@ onBeforeUnmount(() => {
       :style="{ transform: `translate(${dx}px, ${dy}px)` }"
       v-if="isJittering"
     >
-      {{ title }}
+      {{ props.title }}
     </h1>
   </div>
 </template>

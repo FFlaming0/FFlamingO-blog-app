@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { LinkBoxList } from '../../../../types/app/home/link-box.ts'
+import type { SocialLink } from '@/api/system/config/types'
 
 const props = defineProps<{
-  items: LinkBoxList
+  items: SocialLink[]
 }>()
 </script>
 
@@ -11,16 +11,16 @@ const props = defineProps<{
     <!-- 外层加一个包裹层，用于控制图片的绝对定位 -->
     <div v-for="(item, idx) in items" :key="idx" class="link-item-wrapper">
       <a
-        :href="item.link || undefined"
-        :target="item.link ? '_blank' : undefined"
-        :rel="item.link ? 'noopener noreferrer' : undefined"
+        :href="item.url || undefined"
+        :target="item.url ? '_blank' : undefined"
+        :rel="item.url ? 'noopener noreferrer' : undefined"
       >
         <i :class="item.icon"></i>
       </a>
 
       <!-- 图片展开方框 -->
-      <div v-if="item.picture" class="picture-box">
-        <img :src="item.picture" />
+      <div v-if="item.pic" class="picture-box">
+        <img :src="item.pic" />
       </div>
     </div>
   </div>

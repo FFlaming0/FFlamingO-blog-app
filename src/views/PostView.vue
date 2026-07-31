@@ -1,36 +1,34 @@
 <script setup lang="ts">
-import type { Article } from '@/types/article'
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { usePosts } from '@/composables/usePosts.ts'
+// import { usePosts } from '@/composables/usePosts.ts'
 
 const route = useRoute()
 const id = Number(route.params.id)
 
-const { isLoading, error, getArticleById } = usePosts()
+// const { isLoading, error, getArticleById } = usePosts()
 
 // 根据 ID 查找文章
-const article = computed(() => getArticleById(id))
+// const article = computed(() => getArticleById(id))
 </script>
 
 <template>
   <div class="post-view">
     <!-- 文章不存在 -->
-    <div v-if="!article" class="not-found">
+    <!-- <div v-if="!article" class="not-found">
       <h2>文章不存在</h2>
       <p>找不到 ID 为 {{ id }} 的文章</p>
       <RouterLink to="/">返回首页</RouterLink>
-    </div>
+    </div> -->
 
     <!-- 文章存在，展示完整内容 -->
-    <article v-else>
+    <!-- <article v-else>
       <span class="category-tag">{{ article.category }}</span>
       <h1>{{ article.title }}</h1>
       <time>{{ article.date }}</time>
-      <!-- v-html 渲染 HTML 字符串 -->
       <div class="content">{{ article.summary }}</div>
       <RouterLink to="/" class="back-link">← 返回首页</RouterLink>
-    </article>
+    </article> -->
   </div>
 </template>
 

@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import { usePosts } from '@/composables/usePosts.ts'
-import { ref, computed, onMounted } from 'vue'
-import { useSearchStore } from '@/stores/search'
-import BlogCard from '@/components/BlogCard.vue'
-import CategoryFilter from '@/components/CategoryFilter.vue'
 import HomePage from './components/HomePage.vue'
 
-import type { Article } from '@/types/article'
-
-const { activeCategory, categories, filteredArticles } = usePosts()
+// const { activeCategory, categories, filteredArticles } = usePosts()
 
 // 处理子组件发来的分类切换事件
-function handleCategoryChange(cat: string) {
-  activeCategory.value = cat
-}
+// function handleCategoryChange(cat: string) {
+//   activeCategory.value = cat
+// }
 </script>
 
 <template>
@@ -22,7 +15,7 @@ function handleCategoryChange(cat: string) {
     <h2 class="section-title"><i class="fa-solid fa-laptop"></i> Display</h2>
 
     <!-- 分类筛选组件 -->
-    <CategoryFilter
+    <!-- <CategoryFilter
       :categories="categories"
       :active-category="activeCategory"
       @update-category="handleCategoryChange"
@@ -33,11 +26,10 @@ function handleCategoryChange(cat: string) {
     </template>
     <template v-else>
       <p class="result-info">共 {{ filteredArticles.length }} 篇</p>
-      <!-- 文章卡片列表 -->
       <div class="article-grid">
         <BlogCard v-for="article in filteredArticles" :key="article.id" :article="article" />
       </div>
-    </template>
+    </template> -->
   </div>
 </template>
 

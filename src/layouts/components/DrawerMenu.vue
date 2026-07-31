@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { DrawerItemList } from '@/types/layouts/menuItem'
+import type { NavItem } from '@/api/system/config/types'
 
 defineProps<{
-  items: DrawerItemList
+  items: NavItem[]
 }>()
 </script>
 
@@ -13,9 +13,9 @@ defineProps<{
 
     <!-- 下拉菜单 -->
     <div class="dropdown-menu">
-      <a v-for="(item, idx) in items" :key="idx" :href="item.to || '/'" class="dropdown-item">
+      <a v-for="(item, idx) in items" :key="idx" :href="item.link || '/'" class="dropdown-item">
         <i v-if="item.icon" :class="item.icon"></i>
-        {{ item.label }}
+        {{ item.name }}
       </a>
     </div>
   </div>

@@ -3,11 +3,11 @@ import type { Category } from '@/api/blog/category/types'
 import type { Tag } from '@/api/blog/tag/types'
 
 interface SearchResult {
-  keyword: string;
+  keyword: string
   // 匹配的文章列表
-  articles: ArticleListItem[];
+  articles: ArticleListItem[]
   // 匹配的分类（用于快速跳转）
-  matchedCategories: Category[];
+  matchedCategories: Category[]
   // 匹配的标签（用于快速跳转）
-  matchedTags: Tag[];
+  matchedTags: Tag[]
 }
