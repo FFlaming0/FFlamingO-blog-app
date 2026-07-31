@@ -1,6 +1,6 @@
 import { ref, type Ref } from 'vue'
 import { appRequest, adminRequest }  from '@/utils/axios/request.ts' // 导入封装的 axios 实例
-import type { UseRequestOptions, UseRequestReturn } from '@/types/composables/useRequests.ts'
+import type { RequestOptions, RequestReturn } from '@/types/composables/request.ts'
 
 /**
  * 通用的 API 请求 Hook
@@ -10,27 +10,33 @@ import type { UseRequestOptions, UseRequestReturn } from '@/types/composables/us
  */
 export function useRequest<T, Args extends any[] = any[]>(
   apiMethod: (...args: Args) => Promise<T>,
-  options: UseRequestOptions & { defaultParams?: Args } = {},
-): UseRequestReturn<T, Args> {
-  const { immediate = true, defaultParams } = options
-
+  options: RequestOptions<Args> = {},
+): RequestReturn<T, Args> {
+  const { immediate = true, defaultParams, onError } = options;
   const data = ref<T | null>(null) as Ref<T | null>
   const loading = ref(false)
   const error = ref<string | null>(null)
 
   // 执行请求的函数
-  const execute = async (...args: Args): Promise<T> => {
+  const execute = async (...args: Args): Promise<T | undefined> => {
     loading.value = true
     error.value = null
     try {
       const result = await apiMethod(...args)
       data.value = result
       return result
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : String(err)
+    } catch (err) {
+      // 错误统一处理：调用传入的 onError 或全局错误处理函数
+      if (onError) {
+        onError(err);
+      } else {
+        // 假设 showError 会弹出错误提示
+        // showError(err instanceof Error ? err.message : '请求失败');
+        const message = err instanceof Error ? err.message : String(err)
       error.value = message || '请求失败'
       console.error('API Error:', err)
-      throw err
+      }
+      return undefined;
     } finally {
       loading.value = false
     }
@@ -50,7 +56,6 @@ export function useRequest<T, Args extends any[] = any[]>(
   return {
     data,
     loading,
-    error,
     execute,
   }
 }
