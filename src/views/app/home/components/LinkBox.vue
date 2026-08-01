@@ -1,19 +1,63 @@
 <script setup lang="ts">
 import GlassBox from '@/components/box/GlassBox.vue'
+import { reactive } from 'vue'
+
+import { getDropDownAnimeStyles } from '@/composables/animation/useDropDown'
 import type { SocialLink } from '@/api/system/config/types'
 
 const props = defineProps<{
   items: SocialLink[]
 }>()
+
+const hoverStates = reactive<boolean[]>(Array(props.items.length).fill(false))
+
+// 根据索引和悬停状态计算 GlassBox 的视觉 props
+const getItemGlassProps = (idx: number) => {
+  const hovered = hoverStates[idx]
+  return {
+    // 保持尺寸布局不变
+    width: 30,
+    height: 27,
+    padding: '8px 8px',
+    radius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // 动态视觉样式
+    bg: hovered ? 'var(--bg-hover)' : 'var(--bg-homepage-box)',
+    opacity: hovered ? 1 : 0.8,
+    blur: hovered ? '0px' : '16px',
+    borderWidth: hovered ? '1px' : '1px', // 保持边框
+    borderColor: hovered ? 'var(--bg-primary)' : 'var(--bg-primary)',
+    boxShadow: hovered ? '0 0 10px 4px var(--bg-primary)' : 'none',
+  }
+}
+
+// 配置下拉动画参数
+const getDropDownConfig = (idx: number) => {
+  const hovered = !!hoverStates[idx] // 确保是 boolean
+  return getDropDownAnimeStyles(hovered, {
+    enterTransform: 'translateX(-50%) scaleY(1)',
+    exitTransform: 'translateX(-50%) scaleY(0)',
+    transformOrigin: 'top center',
+    duration: '0.3s',
+  })
+}
 </script>
 
 <template>
   <div class="link-box">
     <!-- 外层加一个包裹层，用于控制图片的绝对定位 -->
-    <div v-for="(item, idx) in items" :key="idx" class="link-item-wrapper">
+    <div
+      v-for="(item, idx) in items"
+      :key="idx"
+      class="link-item-wrapper"
+      @mouseenter="hoverStates[idx] = true"
+      @mouseleave="hoverStates[idx] = false"
+    >
       <!-- 链接按钮 -->
       <GlassBox
-        class="link-box-item"
+        v-bind="getItemGlassProps(idx)"
         :width="30"
         :height="27"
         padding="8px 8px"
@@ -36,6 +80,7 @@ const props = defineProps<{
       <GlassBox
         v-if="item.pic"
         class="picture-box"
+        :style="getDropDownConfig(idx)"
         :width="100"
         height="auto"
         padding="4px"
@@ -57,16 +102,6 @@ const props = defineProps<{
   justify-content: center;
   align-items: center;
   gap: 8px;
-}
-
-.link-box-item:hover {
-  background: var(--bg-hover);
-  opacity: 1;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-
-  /* ③ 添加白色半透明外发光阴影 */
-  box-shadow: 0 0 10px 4px var(--bg-primary);
 }
 
 .link-box-item-text {
@@ -97,17 +132,14 @@ const props = defineProps<{
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
-  transform: translateX(-50%) translateY(-12px); /* 初始稍微向上收拢 */
+  z-index: 10;
+  /* transform: translateX(-50%) translateY(-12px) scaleY(0); 初始稍微向上收拢 */
 
   /* 初始状态不可见、不可点击 */
+  /* transform-origin: top center;
   opacity: 0;
   visibility: hidden;
-  pointer-events: none;
-
-  z-index: 10;
-
-  /* 平滑的展开动画 */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; */
 }
 
 .picture {
@@ -120,9 +152,6 @@ const props = defineProps<{
 
 /* 4. 触发动画：鼠标悬停在包裹层上时展开 */
 .link-item-wrapper:hover .picture-box {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0px); /* 回到原位，完成“向下展开”视觉效果 */
   pointer-events: auto;
 }
 </style>
