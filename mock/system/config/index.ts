@@ -74,7 +74,7 @@ const navItems: NavItem[] = [
 ]
 
 const socialLinks: SocialLink[] = [
-  { icon: 'ri-qq-line', url: '', pic: '' },
+  { icon: 'ri-qq-line', url: '', pic: 'images/QQ.png' },
   { icon: 'ri-bilibili-line', url: 'https://space.bilibili.com/283057416' },
   { icon: 'ri-netease-cloud-music-line', url: ''},
   { icon: 'ri-github-line' },

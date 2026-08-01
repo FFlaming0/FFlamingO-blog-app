@@ -19,7 +19,11 @@ const { siteInfo, socialLinks } = storeToRefs(config)
 </script>
 
 <template>
-  <div class="container" v-if="siteInfo" :style="{ backgroundImage: `url(${siteInfo.backgroundImage})` }">
+  <div
+    class="container"
+    v-if="siteInfo"
+    :style="{ backgroundImage: `url(${siteInfo.backgroundImage})` }"
+  >
     <Title :title="siteInfo.mainTitle" />
     <SubTitle :sub-title="siteInfo.subTitle" />
     <LinkBox v-if="socialLinks" :items="socialLinks" />

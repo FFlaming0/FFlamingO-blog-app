@@ -3,27 +3,65 @@
 import NightStyleButton from './NightStyleButton.vue'
 import DrawerMenu from './DrawerMenu.vue'
 import RoundAvatar from '@/components/avatar/RoundAvatar.vue'
+import GlassBox from '@/components/box/GlassBox.vue'
 import { ref, computed } from 'vue'
-import { useSearchStore } from '@/stores/search'
+import { storeToRefs } from 'pinia'
 import { useDarkMode } from '@/composables/layouts/useDarkMode.ts'
 import { useWindowScroll } from '@vueuse/core'
 import { useFrontendConfigStore } from '@/stores/frontendConfig'
-const configStore = useFrontendConfigStore()
+
+const { siteInfo, navItems } = storeToRefs(useFrontendConfigStore())
 
 const { toggleDark } = useDarkMode()
-const search = useSearchStore()
 
 // 获取滚动 Y 轴偏移
 const { y } = useWindowScroll()
 // 滚动超过 10px 时认为已滚动
 const isScrolled = computed(() => y.value > 10)
+// 悬停状态
+const isHovered = ref(false)
+
+// 根据滚动和悬停组合计算毛玻璃样式
+const glassProps = computed(() => {
+  const scrolled = isScrolled.value
+  const hovered = isHovered.value
+  const active = scrolled || hovered
+
+  return {
+    padding: '10px 30px',
+    margin: scrolled ? '0' : '10px 40px 0',
+    maxWidth: 'none',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    radius: scrolled ? '0' : '128px',
+    bg: active ? 'var(--bg-primary)' : 'transparent',
+    opacity: active ? 0.8 : 1,
+    blur: active ? '16px' : '0px',
+    borderWidth: active ? '1px' : '0px',
+    borderColor: active ? 'var(--bg-primary)' : 'transparent',
+    boxShadow: scrolled
+      ? '0 2px 12px rgba(0,0,0,0.15)'
+      : hovered
+        ? '0 2px 8px rgba(0,0,0,0.08)'
+        : 'none',
+  }
+})
 </script>
 
 <template>
-  <header class="navbar" :class="{ scrolled: isScrolled }">
-    <a href="/" class="logo">汀上焰影</a>
+  <GlassBox
+    v-if="siteInfo && navItems"
+    class="navbar"
+    :class="{ scrolled: isScrolled }"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
+    v-bind="glassProps"
+  >
+    <a href="/" class="logo">{{ siteInfo.logo }}</a>
     <nav class="menu-item">
-      <template v-for="item in configStore.navItems" :key="item.name">
+      <template v-for="item in navItems" :key="item.name">
         <!-- 有 secItem → 渲染下拉菜单 -->
         <DrawerMenu v-if="item.secItem" :items="item.secItem">
           <template #down>
@@ -43,47 +81,17 @@ const isScrolled = computed(() => y.value > 10)
       <NightStyleButton @click="toggleDark" />
       <RoundAvatar :diameter="35" />
     </div>
-  </header>
+  </GlassBox>
 </template>
 
 <style scoped>
 /* 基础样式：粘性定位，默认半透明背景，圆角，左右留边 */
 .navbar {
-  /* text-align: center; */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-  /* 默认顶端透明状态 */
-  margin: 10px 40px 0; /* 保留边距，透明不影响视觉 */
-  border-radius: 128px; /* 保留圆角，透明时看不到 */
-  background: transparent; /* 全透明 */
-  backdrop-filter: none; /* 去除毛玻璃 */
-  box-shadow: none; /* 无阴影 */
-  transition: all 0.3s ease; /* 平滑切换 */
-}
-
-/* 顶端悬停 → 恢复“当前样式”（半透明毛玻璃+圆角+边距） */
-.navbar:not(.scrolled):hover {
-  background: var(--bg-primary);
-  backdrop-filter: blur(40px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  /* margin 和 border-radius 沿用默认值，无需覆盖 */
-}
-
-/* 滚动后 → 全宽无圆角，背景与悬停时一致（半透明毛玻璃） */
-.navbar.scrolled {
-  margin: 0; /* 去掉边距，占满宽度 */
-  border-radius: 0; /* 无圆角 */
-  background: var(--bg-primary); /* 与悬停时背景相同 */
-  backdrop-filter: blur(16px); /* 毛玻璃 */
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15); /* 加深阴影 */
-  padding: 10px 30px; /* 可调整内边距，保持舒适 */
 }
 
 .logo {

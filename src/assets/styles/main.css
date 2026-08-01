@@ -4,7 +4,7 @@
   --secondary: #ff7070;
   --bg-primary: #ffffffcc;
   --bg-homepage-box: #ffffff99;
-  --bg-card: #ffffff;
+  --bg-hover: #ffffff;
   --text-primary: #ee5050;
   --text-secondary: #ff7070;
   --border-color: #eeeeee;
@@ -18,7 +18,7 @@ html.dark {
   --secondary: #ff7070;
   --bg-primary: #141414cc;
   --bg-homepage-box: #333333cc;
-  --bg-card: #16213e;
+  --bg-hover: #16213e;
   --text-primary: #ff9393;
   --text-secondary: #ff7070;
   --border-color: #2a2a4a;

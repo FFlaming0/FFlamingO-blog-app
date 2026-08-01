@@ -19,8 +19,11 @@ defineProps<{
 
     <!-- 下拉菜单 -->
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <div class="dropdown-menu">
 =======
+=======
+>>>>>>> Stashed changes
     <GlassBox
       class="dropdown-menu"
       :style="
@@ -83,11 +86,14 @@ defineProps<{
   visibility: hidden; /* 隐藏时不可交互 */
   min-width: 100px;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   background: var(--bg-primary);
   backdrop-filter: blur(8px); /* 毛玻璃效果 */
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   padding: 8px 0;
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
   z-index: 100;
@@ -98,6 +104,7 @@ defineProps<{
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /* 悬停时展开并渐显 */
 .dropdown-wrapper:hover .dropdown-menu {
   transform: translateX(-50%) scaleY(1); /* 完全展开 */
@@ -105,6 +112,8 @@ defineProps<{
   visibility: visible;
 }
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 .dropdown-item {

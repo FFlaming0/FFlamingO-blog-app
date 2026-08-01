@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 
 const props = defineProps<{
-    pic?: string;
+  pic?: string
 }>()
 
 // 图片加载状态

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GlassBox from '@/components/box/GlassBox.vue'
 import type { SocialLink } from '@/api/system/config/types'
 
 const props = defineProps<{
@@ -10,18 +11,42 @@ const props = defineProps<{
   <div class="link-box">
     <!-- 外层加一个包裹层，用于控制图片的绝对定位 -->
     <div v-for="(item, idx) in items" :key="idx" class="link-item-wrapper">
-      <a
-        :href="item.url || undefined"
-        :target="item.url ? '_blank' : undefined"
-        :rel="item.url ? 'noopener noreferrer' : undefined"
+      <!-- 链接按钮 -->
+      <GlassBox
+        class="link-box-item"
+        :width="30"
+        :height="27"
+        padding="8px 8px"
+        radius="50%"
+        display="flex"
+        align-items="center"
+        justify-content="center"
       >
-        <i :class="item.icon"></i>
-      </a>
+        <a
+          :href="item.url || undefined"
+          :target="item.url ? '_blank' : undefined"
+          :rel="item.url ? 'noopener noreferrer' : undefined"
+          class="link-box-item-text"
+        >
+          <i :class="item.icon"></i>
+        </a>
+      </GlassBox>
 
       <!-- 图片展开方框 -->
-      <div v-if="item.pic" class="picture-box">
+      <GlassBox
+        v-if="item.pic"
+        class="picture-box"
+        :width="100"
+        height="auto"
+        padding="4px"
+        radius="8px"
+        display="block"
+      >
+        <img class="picture" :src="item.pic" />
+      </GlassBox>
+      <!-- <div v-if="item.pic" class="picture-box">
         <img :src="item.pic" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -34,33 +59,29 @@ const props = defineProps<{
   gap: 8px;
 }
 
-.link-box a {
+.link-box-item:hover {
+  background: var(--bg-hover);
+  opacity: 1;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  /* ③ 添加白色半透明外发光阴影 */
+  box-shadow: 0 0 10px 4px var(--bg-primary);
+}
+
+.link-box-item-text {
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  /* 设置为正圆形 */
-  width: 30px;
-  height: 27px;
-  border-radius: 50%;
-
-  /* 白色圆环边框 */
-  background: var(--bg-homepage-box);
-  opacity: 0.8;
-  border: 1px solid var(--bg-primary);
-  backdrop-filter: blur(4px);
-
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   color: var(--primary);
   font-size: 24px;
   text-decoration: none;
-
-  transition: all 0.3s ease;
-  padding: 8px 8px; /* 内边距 */
-  backdrop-filter: blur(16px); /* 毛玻璃效果 */
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.link-box a:hover {
+.link-box-item-text:hover {
   color: var(--secondary);
 }
 
@@ -83,23 +104,13 @@ const props = defineProps<{
   visibility: hidden;
   pointer-events: none;
 
-  /* 方框质感：毛玻璃背景、阴影、白边框 */
-  background: var(--bg-homepage-box);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--bg-primary);
-  border-radius: 8px;
-  padding: 4px;
-
-  /* 限制图片大小，防止大图撑爆 */
-  width: 100px;
-  height: auto;
   z-index: 10;
 
   /* 平滑的展开动画 */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.picture-box img {
+.picture {
   width: 100%;
   height: 100%;
   object-fit: contain; /* 保证图片填满方框且不变形 */

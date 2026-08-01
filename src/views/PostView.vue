@@ -16,15 +16,15 @@ const id = Number(route.params.id)
 <template>
   <Feature />
   <!-- <div class="post-view"> -->
-    <!-- 文章不存在 -->
-    <!-- <div v-if="!article" class="not-found">
+  <!-- 文章不存在 -->
+  <!-- <div v-if="!article" class="not-found">
       <h2>文章不存在</h2>
       <p>找不到 ID 为 {{ id }} 的文章</p>
       <RouterLink to="/">返回首页</RouterLink>
     </div> -->
 
-    <!-- 文章存在，展示完整内容 -->
-    <!-- <article v-else>
+  <!-- 文章存在，展示完整内容 -->
+  <!-- <article v-else>
       <span class="category-tag">{{ article.category }}</span>
       <h1>{{ article.title }}</h1>
       <time>{{ article.date }}</time>
