@@ -55,7 +55,8 @@ body {
   font-display: swap; /* 优化加载体验 */
 }
 
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+.content {
+  max-width: 820px;
+  margin: 0 527px;
+  padding: 0px 20px;
 }

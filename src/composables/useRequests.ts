@@ -1,6 +1,6 @@
 import { ref, type Ref } from 'vue'
 import { appRequest, adminRequest } from '@/utils/axios/request.ts' // 导入封装的 axios 实例
-import type { RequestOptions, RequestReturn } from '@/types/composables/request.ts'
+import type { RequestOptions, RequestReturn } from '@/types/axios/request'
 
 /**
  * 通用的 API 请求 Hook

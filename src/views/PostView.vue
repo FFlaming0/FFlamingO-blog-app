@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
+// import Feature from '@/components/feature/index.vue'
 // import { usePosts } from '@/composables/usePosts.ts'
 
 const route = useRoute()
@@ -13,7 +14,8 @@ const id = Number(route.params.id)
 </script>
 
 <template>
-  <div class="post-view">
+  <Feature />
+  <!-- <div class="post-view"> -->
     <!-- 文章不存在 -->
     <!-- <div v-if="!article" class="not-found">
       <h2>文章不存在</h2>
@@ -29,7 +31,7 @@ const id = Number(route.params.id)
       <div class="content">{{ article.summary }}</div>
       <RouterLink to="/" class="back-link">← 返回首页</RouterLink>
     </article> -->
-  </div>
+  <!-- </div> -->
 </template>
 
 <style scoped>

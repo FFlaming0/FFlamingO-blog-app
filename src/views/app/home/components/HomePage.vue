@@ -7,25 +7,21 @@ import SubTitle from './SubTitle.vue'
 import LinkBox from './LinkBox.vue'
 import { useFrontendConfigStore } from '@/stores/frontendConfig'
 
-import type { LinkBoxList } from '@/types/app/home/link-box.ts'
-
 const config = useFrontendConfigStore()
 const { siteInfo, socialLinks } = storeToRefs(config)
 
-import bg from '/images/homepage/END8-1_7.png'
+// import bg from '/images/homepage/END8-1_7.png'
 
-const bgImageUrl = ref(new URL(bg, import.meta.url).href)
-const changeBackground = (newUrl: string) => {
-  bgImageUrl.value = newUrl
-}
-
-
+// const bgImageUrl = ref(new URL(bg, import.meta.url).href)
+// const changeBackground = (newUrl: string) => {
+//   bgImageUrl.value = newUrl
+// }
 </script>
 
 <template>
-  <div class="container" :style="{ backgroundImage: `url(${bgImageUrl})` }">
-    <Title v-if="siteInfo" :title="siteInfo.mainTitle" />
-    <SubTitle v-if="siteInfo" :sub-title="siteInfo.subTitle" />
+  <div class="container" v-if="siteInfo" :style="{ backgroundImage: `url(${siteInfo.backgroundImage})` }">
+    <Title :title="siteInfo.mainTitle" />
+    <SubTitle :sub-title="siteInfo.subTitle" />
     <LinkBox v-if="socialLinks" :items="socialLinks" />
   </div>
 </template>

@@ -11,7 +11,7 @@ import HomePage from './components/HomePage.vue'
 
 <template>
   <HomePage />
-  <div class="home">
+  <div class="content">
     <h2 class="section-title"><i class="fa-solid fa-laptop"></i> Display</h2>
 
     <!-- 分类筛选组件 -->
@@ -34,11 +34,6 @@ import HomePage from './components/HomePage.vue'
 </template>
 
 <style scoped>
-.home {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
-}
 .section-title {
   font-size: 24px;
   margin-bottom: 20px;

@@ -12,6 +12,7 @@ export default defineConfig({
     vueDevTools(),
     viteMockServe({
       mockPath: './mock', // 存放 mock 文件的文件夹
+      logger: true,
     })
   ],
   resolve: {
