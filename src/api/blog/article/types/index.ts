@@ -5,16 +5,16 @@ import type { Tag } from '@/api/blog/tag/types'
 interface ArticleListItem {
   id: number
   slug: string // URL 路由标识
-  title: string
+  title: string // 标题
   summary: string // 摘要
   coverImage?: string // 封面图
   category: Category // 所属分类（简略对象）
   tags: Tag[] // 关联标签列表
   status: 'PUBLISHED' // 前台只展示已发布
   publishTime: string // 格式化时间 "yyyy-MM-dd HH:mm:ss"
-  wordCount: number
+  wordCount: number // 文章字数
   readingTime: number // 阅读时长（分钟）
-  viewCount: number
+  viewCount: number // 访问量
   isTop: boolean // 是否置顶
   isComment: boolean // 是否允许评论
   commentCount: number // 评论总数（用于列表展示）

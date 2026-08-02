@@ -25,6 +25,9 @@ const handleImageError = (e: Event) => {
       @error="handleImageError"
     />
 
+    <!-- 半透明遮罩（仅当图片存在且加载成功时显示） -->
+    <div v-if="!imageError" class="image-overlay"></div>
+
     <!-- 插槽内容：覆盖在图片上方（或作为纯内容区） -->
     <div class="content">
       <div class="slot-container">
@@ -57,14 +60,29 @@ const handleImageError = (e: Event) => {
   display: block;
 }
 
-/* 插槽外层容器：绝对定位覆盖，不干扰点击事件 */
-.content {
+.image-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none; /* 让鼠标事件穿透，不干扰点击交互 */
+  z-index: 1; /* 确保在图片之上 */
+}
+
+/* 插槽外层容器：绝对定位覆盖，不干扰点击事件 */
+.content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
   pointer-events: none; /* 让点击穿透，内部内容可交互 */
+  display: flex; /* 启用 Flex */
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
 /* 插槽实际容器：占满父容器，且允许交互 */

@@ -44,6 +44,8 @@ const props = withDefaults(
     boxShadow?: string
     /** 是否启用毛玻璃效果（快速开关） */
     enableGlass?: boolean
+    /** 自定义 backdrop-filter 值（若提供，则覆盖 blur 生成的默认值） */
+    backdropFilter?: string
   }>(),
   {
     width: 'auto',
@@ -67,6 +69,7 @@ const props = withDefaults(
     borderColor: 'var(--bg-primary)',
     boxShadow: 'none',
     enableGlass: true,
+    backdropFilter: undefined,
   },
 )
 
@@ -87,8 +90,11 @@ const boxStyle = computed<CSSProperties>(() => {
     borderRadius: props.circle ? '50%' : props.radius,
     background: props.enableGlass ? props.bg : 'transparent',
     opacity: props.enableGlass ? props.opacity : 1,
-    backdropFilter: props.enableGlass ? `blur(${props.blur})` : 'none',
-    WebkitBackdropFilter: props.enableGlass ? `blur(${props.blur})` : 'none',
+    // 优先使用自定义 backdropFilter，否则使用 blur
+    backdropFilter: props.enableGlass ? props.backdropFilter || `blur(${props.blur})` : 'none',
+    WebkitBackdropFilter: props.enableGlass
+      ? props.backdropFilter || `blur(${props.blur})`
+      : 'none',
     border: props.enableGlass ? `${props.borderWidth} solid ${props.borderColor}` : 'none',
     boxShadow: props.enableGlass ? props.boxShadow : 'none',
   }

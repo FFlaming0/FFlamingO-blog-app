@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-// import Feature from '@/components/feature/index.vue'
-// import { usePosts } from '@/composables/usePosts.ts'
+import ArticleList from '@/components/card/ArticleList.vue'
 
 const route = useRoute()
 const id = Number(route.params.id)
@@ -15,23 +14,9 @@ const id = Number(route.params.id)
 
 <template>
   <Feature />
-  <!-- <div class="post-view"> -->
-  <!-- 文章不存在 -->
-  <!-- <div v-if="!article" class="not-found">
-      <h2>文章不存在</h2>
-      <p>找不到 ID 为 {{ id }} 的文章</p>
-      <RouterLink to="/">返回首页</RouterLink>
-    </div> -->
-
-  <!-- 文章存在，展示完整内容 -->
-  <!-- <article v-else>
-      <span class="category-tag">{{ article.category }}</span>
-      <h1>{{ article.title }}</h1>
-      <time>{{ article.date }}</time>
-      <div class="content">{{ article.summary }}</div>
-      <RouterLink to="/" class="back-link">← 返回首页</RouterLink>
-    </article> -->
-  <!-- </div> -->
+  <div class="content">
+    <ArticleList :category-slug="'anime'" />
+  </div>
 </template>
 
 <style scoped>

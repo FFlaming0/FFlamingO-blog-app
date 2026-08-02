@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/app/home/HomeView.vue'
-import PostView from '@/views/PostView.vue'
+import TestView from '@/views/TestView.vue'
 
 import type { RouteRecordRaw } from 'vue-router'
 
@@ -18,13 +18,18 @@ const routes: RouteRecordRaw[] = [
     path: '/test',
     name: 'test',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
-    component: PostView,
+    component: TestView,
   },
   {
-    // 动态路由：:id 是占位符，匹配任意值
-    // /post/1、/post/2、/post/hello 都会匹配到这条
-    path: '/category/:slug',
-    name: 'category',
+    path: '/article/:slug',
+    name: 'articleSlug',
+    // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
+    component: () => import('@/views/app/category/CategoryView.vue'),
+    props: true,
+  },
+  {
+    path: '/article/:id',
+    name: 'articleId',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
     component: () => import('@/views/app/category/CategoryView.vue'),
     props: true,

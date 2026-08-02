@@ -3,5 +3,5 @@ export interface Tag {
   name: string
   slug: string
   image?: string
-  articleCount: number
+  articleCount?: number
 }
