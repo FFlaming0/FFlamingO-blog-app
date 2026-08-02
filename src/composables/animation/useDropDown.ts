@@ -27,8 +27,8 @@ export interface ExpandConfig {
  */
 export function getDropDownAnimeStyles(isOpen: boolean, config: ExpandConfig = {}): CSSProperties {
   const {
-    enterTransform = 'scaleY(1)',
-    exitTransform = 'scaleY(0)',
+    enterTransform = 'translateX(-50%) scaleY(1)',
+    exitTransform = 'translateX(-50%) scaleY(0)',
     enterOpacity = 1,
     exitOpacity = 0,
     transformOrigin = 'top center',

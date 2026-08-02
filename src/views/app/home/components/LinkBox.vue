@@ -36,12 +36,7 @@ const getItemGlassProps = (idx: number) => {
 // 配置下拉动画参数
 const getDropDownConfig = (idx: number) => {
   const hovered = !!hoverStates[idx] // 确保是 boolean
-  return getDropDownAnimeStyles(hovered, {
-    enterTransform: 'translateX(-50%) scaleY(1)',
-    exitTransform: 'translateX(-50%) scaleY(0)',
-    transformOrigin: 'top center',
-    duration: '0.3s',
-  })
+  return getDropDownAnimeStyles(hovered)
 }
 </script>
 

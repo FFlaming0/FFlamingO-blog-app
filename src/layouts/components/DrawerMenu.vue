@@ -20,13 +20,7 @@ const isOpen = ref(false)
     <!-- 下拉菜单 -->
     <GlassBox
       class="dropdown-menu"
-      :style="
-        getDropDownAnimeStyles(isOpen, {
-          enterTransform: 'translateX(-50%) scaleY(1)',
-          exitTransform: 'translateX(-50%) scaleY(0)',
-          transformOrigin: 'top center',
-          duration: '0.3s',
-        })"
+      :style="getDropDownAnimeStyles(isOpen)"
       :padding="'8px 0'"
       :radius="'16px'"
       :bg="'var(--bg-primary)'"
@@ -41,22 +35,6 @@ const isOpen = ref(false)
         {{ item.name }}
       </a>
     </GlassBox>
-    <div
-      class="dropdown-menu"
-      :style="
-        getDropDownAnimeStyles(isOpen, {
-          enterTransform: 'translateX(-50%) scaleY(1)',
-          exitTransform: 'translateX(-50%) scaleY(0)',
-          transformOrigin: 'top center',
-          duration: '0.3s',
-        })
-      "
-    >
-      <a v-for="(item, idx) in items" :key="idx" :href="item.link || '/'" class="dropdown-item">
-        <i v-if="item.icon" :class="item.icon"></i>
-        {{ item.name }}
-      </a>
-    </div>
   </div>
 </template>
 
