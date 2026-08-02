@@ -21,10 +21,17 @@ const routes: RouteRecordRaw[] = [
     component: TestView,
   },
   {
-    path: '/article/:slug',
-    name: 'articleSlug',
+    path: '/category/:slug',
+    name: 'category',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
     component: () => import('@/views/app/category/CategoryView.vue'),
+    props: true,
+  },
+  {
+    path: '/tag/:slug',
+    name: 'tag',
+    // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
+    component: () => import('@/views/app/tag/TagView.vue'),
     props: true,
   },
   {
@@ -34,6 +41,13 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/app/category/CategoryView.vue'),
     props: true,
   },
+  {
+    path: '/article/:slug',
+    name: 'articleSlug',
+    // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
+    component: () => import('@/views/app/category/CategoryView.vue'),
+    props: true,
+  }
 ]
 
 // 创建路由实例
