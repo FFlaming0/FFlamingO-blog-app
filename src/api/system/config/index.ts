@@ -6,6 +6,7 @@ import type {
   FooterInfo,
   Seo,
   DisplayItem,
+  DisplayInfo,
   FrontendConfig,
 } from '@/api/system/config/types'
 
@@ -16,3 +17,5 @@ export const getSocialLinks = (): Promise<SocialLink[]> =>
 export const getFooterInfo = (): Promise<FooterInfo> => appRequest.get('/system/config/footer-info')
 export const getSeo = (): Promise<Seo> => appRequest.get('/system/config/seo')
 export const getDisplays = (): Promise<DisplayItem[]> => appRequest.get('/system/config/display')
+export const getDisplayInfo = (): Promise<DisplayInfo[]> =>
+  appRequest.get('/system/config/display/info')

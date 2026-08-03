@@ -73,7 +73,6 @@ const badgeStyle = {
 
       <GlassBox
         class="article-title"
-        :bg="'#ffffffbd'"
         :opacity="1"
         radius="0px"
         :backdrop-filter="'saturate(180%) blur(10px)'"
@@ -189,7 +188,7 @@ const badgeStyle = {
 
 .article-title:hover {
   box-shadow: 0 1px 20px 10px rgba(232, 232, 232, 0.3);
-  background: rgba(255, 255, 255, 0.85);
+  /* background: rgba(255, 255, 255, 0.85); */
 }
 
 .title-text {

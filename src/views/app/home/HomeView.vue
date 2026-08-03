@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import HomePage from './components/HomePage.vue'
+import DisplayBos from './components/DisplayBox.vue'
 import DisplayTitle from '@/components/title/DisplayTitle.vue'
 import ArticleList from '@/components/card/ArticleList.vue'
+import DisplayBox from './components/DisplayBox.vue'
 
 // const { activeCategory, categories, filteredArticles } = usePosts()
 
@@ -15,7 +17,7 @@ import ArticleList from '@/components/card/ArticleList.vue'
   <HomePage />
   <div class="content">
     <DisplayTitle :title="'Display'" :icon="'fa-solid fa-laptop'" />
-
+    <DisplayBox />
     <DisplayTitle :title="'Article'" :icon="'fa-regular fa-bookmark'" />
     <ArticleList />
 
