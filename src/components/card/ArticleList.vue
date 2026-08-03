@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ArticleCard from '@/components/card/ArticleCard.vue'
-
-import type { ArticleListItem } from '@/api/blog/article/types'
+import DisplayTitle from '@/components/title/DisplayTitle.vue'
 
 import { getArticleList } from '@/api/blog/article'
 import { useRequest } from '@/composables/useRequests'
@@ -20,6 +19,7 @@ const { data: articles } = useRequest(() =>
 </script>
 
 <template>
+  <DisplayTitle :title="'Article'" :icon="'fa-regular fa-bookmark'" />
   <div class="content">
     <div v-for="article in articles" :key="article.id" class="article-card">
       <ArticleCard :article="article" />

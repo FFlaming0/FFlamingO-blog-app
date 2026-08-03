@@ -11,7 +11,10 @@ const props = defineProps<{
 
 const watchParams = computed(() => [props.slug] as [string])
 
-const { data: categoryInfo } = useRequest(getCategory, { defaultParams: [props.slug], watchParams: watchParams})
+const { data: categoryInfo } = useRequest(getCategory, {
+  defaultParams: [props.slug],
+  watchParams: watchParams,
+})
 </script>
 
 <template>

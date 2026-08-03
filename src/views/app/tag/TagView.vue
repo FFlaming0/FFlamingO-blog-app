@@ -11,7 +11,10 @@ const props = defineProps<{
 
 const watchParams = computed(() => [props.slug] as [string])
 
-const { data: tagInfo } = useRequest(getTag, { defaultParams: [props.slug], watchParams: watchParams})
+const { data: tagInfo } = useRequest(getTag, {
+  defaultParams: [props.slug],
+  watchParams: watchParams,
+})
 </script>
 
 <template>

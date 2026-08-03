@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HomePage from './components/HomePage.vue'
+import DisplayTitle from '@/components/title/DisplayTitle.vue'
 
 // const { activeCategory, categories, filteredArticles } = usePosts()
 
@@ -12,7 +13,7 @@ import HomePage from './components/HomePage.vue'
 <template>
   <HomePage />
   <div class="content">
-    <h2 class="section-title"><i class="fa-solid fa-laptop"></i> Display</h2>
+    <DisplayTitle :title="'Display'" :icon="'fa-solid fa-laptop'" />
 
     <!-- 分类筛选组件 -->
     <!-- <CategoryFilter
@@ -34,10 +35,6 @@ import HomePage from './components/HomePage.vue'
 </template>
 
 <style scoped>
-.section-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
 .article-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
