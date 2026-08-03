@@ -19,8 +19,7 @@ const { data: articles } = useRequest(() =>
 </script>
 
 <template>
-  <DisplayTitle :title="'Article'" :icon="'fa-regular fa-bookmark'" />
-  <div class="content">
+  <div class="article-list">
     <div v-for="article in articles" :key="article.id" class="article-card">
       <ArticleCard :article="article" />
     </div>
@@ -28,8 +27,7 @@ const { data: articles } = useRequest(() =>
 </template>
 
 <style scoped>
-.content {
-  padding: 4% 0 0;
+.article-list {
   position: relative;
   display: flex;
   flex-direction: column;

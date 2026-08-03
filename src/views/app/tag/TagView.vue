@@ -23,7 +23,9 @@ const { data: tagInfo } = useRequest(getTag, {
       <h1 class="tag-title">{{ tagInfo.name }}</h1>
     </div>
   </FeatureImage>
-  <ArticleList v-if="tagInfo" :category="slug" />
+  <div class="content">
+    <ArticleList v-if="tagInfo" :category="slug" />
+  </div>
 </template>
 
 <style scoped>

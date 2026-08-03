@@ -13,6 +13,7 @@ defineProps<{
 .display-title {
   font-size: 24px;
   padding: 0 0 10px;
+  margin: 10px;
   color: var(--primary);
 }
 

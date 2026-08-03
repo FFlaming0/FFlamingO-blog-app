@@ -23,7 +23,9 @@ const { data: categoryInfo } = useRequest(getCategory, {
       <h1 class="category-title">{{ categoryInfo.name }}</h1>
     </div>
   </FeatureImage>
-  <ArticleList v-if="categoryInfo" :category="slug" />
+  <div class="content">
+    <ArticleList v-if="categoryInfo" :category="slug" />
+  </div>
 </template>
 
 <style scoped>

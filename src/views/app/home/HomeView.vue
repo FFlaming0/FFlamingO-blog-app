@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HomePage from './components/HomePage.vue'
 import DisplayTitle from '@/components/title/DisplayTitle.vue'
+import ArticleList from '@/components/card/ArticleList.vue'
 
 // const { activeCategory, categories, filteredArticles } = usePosts()
 
@@ -14,6 +15,9 @@ import DisplayTitle from '@/components/title/DisplayTitle.vue'
   <HomePage />
   <div class="content">
     <DisplayTitle :title="'Display'" :icon="'fa-solid fa-laptop'" />
+
+    <DisplayTitle :title="'Article'" :icon="'fa-regular fa-bookmark'" />
+    <ArticleList />
 
     <!-- 分类筛选组件 -->
     <!-- <CategoryFilter
