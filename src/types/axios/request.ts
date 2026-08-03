@@ -4,6 +4,7 @@ import type { Ref } from 'vue'
 interface RequestOptions<Args extends any[]> {
   immediate?: boolean // 是否立即执行
   defaultParams?: Args // 默认参数
+  watchParams?: Ref<Args> // 监听参数
   onError?: (err: unknown) => void // 可选的自定义错误处理，覆盖全局
 }
 

@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue'
+import { ref, watchEffect, type Ref } from 'vue'
 import { appRequest, adminRequest } from '@/utils/axios/request.ts' // 导入封装的 axios 实例
 import type { RequestOptions, RequestReturn } from '@/types/axios/request'
 
@@ -12,7 +12,7 @@ export function useRequest<T, Args extends any[] = any[]>(
   apiMethod: (...args: Args) => Promise<T>,
   options: RequestOptions<Args> = {},
 ): RequestReturn<T, Args> {
-  const { immediate = true, defaultParams, onError } = options
+  const { immediate = true, defaultParams, watchParams, onError } = options
   const data = ref<T | null>(null) as Ref<T | null>
   const loading = ref(false)
   const error = ref<string | null>(null)
@@ -42,17 +42,26 @@ export function useRequest<T, Args extends any[] = any[]>(
     }
   }
 
-  // 如果配置为立即执行，则调用 execute
-  if (immediate) {
-    if (defaultParams !== undefined) {
-      execute(...defaultParams)
-    } else {
-      // 无参数调用，适用于 Args 为空元组或全部可选的情况
-      // 若 Args 非空且无默认参数，运行时将报错，请确保使用正确
-      ;(execute as any)()
+  if (watchParams) {
+    // 存在 watchParams：使用 watchEffect 自动响应参数变化，不执行初始请求
+    watchEffect(() => {
+      const params = watchParams.value
+      if (params !== undefined && params !== null) {
+        execute(...params)
+      }
+    })
+  } else {
+    // 不存在 watchParams：按原有逻辑执行初始请求
+    if (immediate) {
+      if (defaultParams !== undefined) {
+        execute(...defaultParams)
+      } else {
+        // 无参数调用（适用于 Args 为空元组）
+        ;(execute as any)()
+      }
     }
   }
-
+  
   return {
     data,
     loading,

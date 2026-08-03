@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, computed } from 'vue'
 import FeatureImage from '@/components/feature/FeatureImage.vue'
 import ArticleList from '@/components/card/ArticleList.vue'
 import { useRequest } from '@/composables/useRequests'
@@ -9,7 +9,9 @@ const props = defineProps<{
   slug: string
 }>()
 
-const { data: categoryInfo } = useRequest(getCategory, { defaultParams: [props.slug] })
+const watchParams = computed(() => [props.slug] as [string])
+
+const { data: categoryInfo } = useRequest(getCategory, { defaultParams: [props.slug], watchParams: watchParams})
 </script>
 
 <template>
