@@ -35,19 +35,12 @@ const routes: RouteRecordRaw[] = [
     props: true,
   },
   {
-    path: '/article/:id',
-    name: 'articleId',
+    path: '/article/:slug',
+    name: 'article',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
     component: () => import('@/views/app/category/CategoryView.vue'),
     props: true,
   },
-  {
-    path: '/article/:slug',
-    name: 'articleSlug',
-    // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
-    component: () => import('@/views/app/category/CategoryView.vue'),
-    props: true,
-  }
 ]
 
 // 创建路由实例

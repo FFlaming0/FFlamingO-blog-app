@@ -4,6 +4,7 @@ import NightStyleButton from './NightStyleButton.vue'
 import DrawerMenu from './DrawerMenu.vue'
 import RoundAvatar from '@/components/avatar/RoundAvatar.vue'
 import GlassBox from '@/components/box/GlassBox.vue'
+import AppLink from '@/components/link/AppLink.vue'
 import { ref, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useDarkMode } from '@/composables/layouts/useDarkMode.ts'
@@ -59,24 +60,24 @@ const glassProps = computed(() => {
     @mouseleave="isHovered = false"
     v-bind="glassProps"
   >
-    <a href="/" class="logo">{{ siteInfo.logo }}</a>
+    <AppLink :to="'/'" class="logo">{{ siteInfo.logo }}</AppLink>
     <nav class="menu-item">
       <template v-for="item in navItems" :key="item.name">
         <!-- 有 secItem → 渲染下拉菜单 -->
         <DrawerMenu v-if="item.secItem" :items="item.secItem">
           <template #down>
-            <a class="nav-link"><i :class="item.icon"></i>{{ item.name }}</a>
+            <span class="nav-link"><i :class="item.icon"></i>{{ item.name }}</span>
           </template>
         </DrawerMenu>
         <!-- 无 children → 普通链接 -->
-        <a v-else :href="item.link || '/'" class="nav-link">
+        <AppLink v-else :to="item.link" class="nav-link">
           <i :class="item.icon"></i>{{ item.name }}
-        </a>
+        </AppLink>
       </template>
     </nav>
     <div class="tool-box">
-      <a><i class="fa-solid fa-magnifying-glass"></i></a>
-      <a><i class="fa-solid fa-dice"></i></a>
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-solid fa-dice"></i>
       <!-- <Search v-model="search.keyword" /> -->
       <NightStyleButton @click="toggleDark" />
       <RoundAvatar :diameter="35" />

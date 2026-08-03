@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import GlassBox from '@/components/box/GlassBox.vue'
+import AppLink from '@/components/link/AppLink.vue'
 import { getDropDownAnimeStyles } from '@/composables/animation/useDropDown'
 import type { NavItem } from '@/api/system/config/types'
 
@@ -30,10 +31,10 @@ const isOpen = ref(false)
       :enable-glass="true"
       display="block"
     >
-      <a v-for="(item, idx) in items" :key="idx" :href="item.link || '/'" class="dropdown-item">
+      <AppLink v-for="(item, idx) in items" :key="idx" :to="item.link" class="dropdown-item">
         <i v-if="item.icon" :class="item.icon"></i>
         {{ item.name }}
-      </a>
+      </AppLink>
     </GlassBox>
   </div>
 </template>

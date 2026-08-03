@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GlassBox from '@/components/box/GlassBox.vue'
+import AppLink from '@/components/link/AppLink.vue'
 import { reactive } from 'vue'
 
 import { getDropDownAnimeStyles } from '@/composables/animation/useDropDown'
@@ -61,14 +62,14 @@ const getDropDownConfig = (idx: number) => {
         align-items="center"
         justify-content="center"
       >
-        <a
-          :href="item.url || undefined"
+        <AppLink
+          class="link-box-item-text"
+          :to="item.url"
           :target="item.url ? '_blank' : undefined"
           :rel="item.url ? 'noopener noreferrer' : undefined"
-          class="link-box-item-text"
         >
           <i :class="item.icon"></i>
-        </a>
+        </AppLink>
       </GlassBox>
 
       <!-- 图片展开方框 -->
@@ -76,7 +77,7 @@ const getDropDownConfig = (idx: number) => {
         v-if="item.pic"
         class="picture-box"
         :style="getDropDownConfig(idx)"
-        :width="100"
+        :width="165"
         height="auto"
         padding="4px"
         radius="8px"
@@ -84,9 +85,6 @@ const getDropDownConfig = (idx: number) => {
       >
         <img class="picture" :src="item.pic" />
       </GlassBox>
-      <!-- <div v-if="item.pic" class="picture-box">
-        <img :src="item.pic" />
-      </div> -->
     </div>
   </div>
 </template>
@@ -128,13 +126,6 @@ const getDropDownConfig = (idx: number) => {
   top: calc(100% + 12px);
   left: 50%;
   z-index: 10;
-  /* transform: translateX(-50%) translateY(-12px) scaleY(0); 初始稍微向上收拢 */
-
-  /* 初始状态不可见、不可点击 */
-  /* transform-origin: top center;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none; */
 }
 
 .picture {
