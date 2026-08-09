@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const isActive = ref(false)
-// 切换状态
-const toggleActive = () => {
-  isActive.value = !isActive.value
-}
+import { useDarkMode } from '@/composables/layouts/useDarkMode'
+
+const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
   <button-block
     id="night-style-btn"
-    :class="{ active: isActive }"
-    @click="toggleActive"
+    :class="{ active: isDark  }"
+    @click="toggleDark"
   ></button-block>
 </template>
 
