@@ -90,6 +90,6 @@ const handleImageError = (e: Event) => {
   width: 100%;
   height: 100%;
   pointer-events: auto;
-  /* 无任何颜色、对齐、内边距等样式，完全由使用者决定 */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
 }
 </style>

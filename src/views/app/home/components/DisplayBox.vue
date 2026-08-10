@@ -25,7 +25,7 @@ const { displays, displayInfo } = storeToRefs(configStore)
       </div>
       <AppLink :to="display.link" class="card-link">
         <div class="card-image">
-            <img :src="display.image" :alt="display.title">
+          <img :src="display.image" :alt="display.title" />
         </div>
         <div class="card-info">{{ display.description }}</div>
       </AppLink>
@@ -142,32 +142,32 @@ const { displays, displayInfo } = storeToRefs(configStore)
 }
 
 .card-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    letter-spacing: 0.02em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.02em;
 }
 
 .card-link {
-    background-color: transparent;
-    text-decoration: none;
-    color: var(--theme-skin, #505050);
-    outline: 0;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out;
-    word-break: break-word;
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--theme-skin, #505050);
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  word-break: break-word;
 }
 
 .card-image {
-    height: 100%;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 .card-image img {
@@ -178,16 +178,23 @@ const { displays, displayInfo } = storeToRefs(configStore)
 }
 
 .card-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 4rem 1.25rem 2rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 70%, transparent 100%);
-    color: white;
-    transition: transform 0.4s ease, opacity 0.3s;
-    z-index: 2;
-    transform: translateY(1rem);
-    opacity: 0.9;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 4rem 1.25rem 2rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 70%,
+    transparent 100%
+  );
+  color: white;
+  transition:
+    transform 0.4s ease,
+    opacity 0.3s;
+  z-index: 2;
+  transform: translateY(1rem);
+  opacity: 0.9;
 }
 </style>

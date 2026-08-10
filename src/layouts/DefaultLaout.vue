@@ -7,7 +7,7 @@ const configStore = useFrontendConfigStore()
 
 <template>
   <div>
-    <!-- <NavBar /> -->
+    <NavBar />
     <main>
       <slot></slot>
     </main>

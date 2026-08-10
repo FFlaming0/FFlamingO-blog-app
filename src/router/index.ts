@@ -38,7 +38,7 @@ const routes: RouteRecordRaw[] = [
     path: '/article/:slug',
     name: 'article',
     // 懒加载：访问时才加载，打包时会拆分出独立的 JS 文件
-    component: () => import('@/views/app/category/CategoryView.vue'),
+    component: () => import('@/views/app/article/ArticleView.vue'),
     props: true,
   },
 ]

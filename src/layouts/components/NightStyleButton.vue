@@ -7,11 +7,7 @@ const { isDark, toggleDark } = useDarkMode()
 </script>
 
 <template>
-  <button-block
-    id="night-style-btn"
-    :class="{ active: isDark  }"
-    @click="toggleDark"
-  ></button-block>
+  <button-block id="night-style-btn" :class="{ active: isDark }" @click="toggleDark"></button-block>
 </template>
 
 <style scoped>
