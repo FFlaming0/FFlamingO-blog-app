@@ -105,8 +105,8 @@ const showToc = computed(() => y.value > 300)
 
 .toc-aside {
   position: fixed;
-  right: 20px;         /* 距离右侧边距 */
-  top: 100px;          /* 与顶部保持距离，适应固定导航栏 */
+  right: 20px; /* 距离右侧边距 */
+  top: 100px; /* 与顶部保持距离，适应固定导航栏 */
   width: 240px;
   max-height: calc(100vh - 160px);
   overflow-y: auto;

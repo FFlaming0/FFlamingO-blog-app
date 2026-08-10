@@ -49,12 +49,6 @@ interface DisplayItem {
   enabled: boolean
 }
 
-interface DisplayInfo {
-  icon?: string
-  label: string
-  value: string
-}
-
 /** 前台全量配置 */
 interface FrontendConfig {
   siteInfo: SiteInfo
@@ -63,18 +57,8 @@ interface FrontendConfig {
   // 社交与展示
   socialLinks: SocialLink[]
   displays: DisplayItem[]
-  displayInfo: DisplayInfo[]
   // SEO 全局
   seo: Seo
 }
 
-export type {
-  SiteInfo,
-  NavItem,
-  SocialLink,
-  FooterInfo,
-  Seo,
-  DisplayItem,
-  DisplayInfo,
-  FrontendConfig,
-}
+export type { SiteInfo, NavItem, SocialLink, FooterInfo, Seo, DisplayItem, FrontendConfig }

@@ -1,20 +1,43 @@
 <script setup lang="ts">
 import AppLink from '@/components/link/AppLink.vue'
 import { useFrontendConfigStore } from '@/stores/frontendConfig'
+import { useStatsStore } from '@/stores/stats'
 import { storeToRefs } from 'pinia'
 
 const configStore = useFrontendConfigStore()
-const { displays, displayInfo } = storeToRefs(configStore)
+const { displays } = storeToRefs(configStore)
+const { statsOverview } = storeToRefs(useStatsStore())
 </script>
 
 <template>
   <div class="display-grid">
-    <div v-if="displayInfo" class="stat-container">
-      <div class="stat-item" v-for="(item, idx) in displayInfo" :key="idx">
-        <i :class="item.icon"></i>
+    <div v-if="statsOverview" class="stat-container">
+      <div class="stat-item">
+        <i class="fa-solid fa-medal"></i>
         <div class="stat-content">
-          <span class="stat-label">{{ item.label }}</span>
-          <span class="stat-value">{{ item.value }}</span>
+          <span class="stat-label">运行时间</span>
+          <span class="stat-content">{{ statsOverview.runDays }} 天</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fa-regular fa-file-lines"></i>
+        <div class="stat-content">
+          <span class="stat-label">内容数</span>
+          <span class="stat-content">{{ statsOverview.articleCount }} 篇</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fa-regular fa-eye"></i>
+        <div class="stat-content">
+          <span class="stat-label">访问数</span>
+          <span class="stat-content">{{ statsOverview.totalViews }}</span>
+        </div>
+      </div>
+      <div class="stat-item">
+        <i class="fa-solid fa-user-clock"></i>
+        <div class="stat-content">
+          <span class="stat-label">上次在线</span>
+          <span class="stat-content">{{ statsOverview.lastLoginTime }}</span>
         </div>
       </div>
     </div>
@@ -88,6 +111,7 @@ const { displays, displayInfo } = storeToRefs(configStore)
   align-items: flex-start;
   justify-content: center;
   line-height: 1.2;
+  font-weight: 600;
 }
 
 .stat-label {
