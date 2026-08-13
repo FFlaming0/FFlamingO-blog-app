@@ -4,6 +4,7 @@ import { useWindowScroll } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import FeatureImage from '@/components/feature/FeatureImage.vue'
 import RoundAvatar from '@/components/avatar/RoundAvatar.vue'
+import RoRAvatar from '@/components/avatar/RoRAvatar.vue'
 import AppLink from '@/components/link/AppLink.vue'
 import Catalogue from './components/Catalogue.vue'
 import { useRequest } from '@/composables/useRequests'
@@ -60,7 +61,8 @@ const { blogger } = storeToRefs(bloggerStore)
           <i class="fa-brands fa-creative-commons-sa"></i>
         </AppLink>
         <div class="footer-item avatar">
-          <RoundAvatar :diameter="30" />
+          <!-- <RoundAvatar :diameter="30" /> -->
+          <RoRAvatar :diameter="30" />
         </div>
         <div class="footer-item">
           {{ blogger.nickname }}
